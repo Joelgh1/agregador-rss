@@ -1,4 +1,4 @@
-package com.joelgh.rss_aggregator
+package com.joelgh.features
 
 import org.junit.Test
 

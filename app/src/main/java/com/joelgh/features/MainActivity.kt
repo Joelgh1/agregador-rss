@@ -1,4 +1,4 @@
-package com.joelgh.rss_aggregator
+package com.joelgh.features
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

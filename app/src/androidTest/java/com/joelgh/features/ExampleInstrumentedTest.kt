@@ -1,4 +1,4 @@
-package com.joelgh.rss_aggregator
+package com.joelgh.features
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
