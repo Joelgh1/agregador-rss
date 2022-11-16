@@ -13,8 +13,6 @@ class RssDataRepository(private val localSource: LocalDataSource) : RssRepositor
         TODO("Not yet implemented")
     }
 
-    override suspend fun getAll(): Either<ErrorApp, List<Rss>>{
+    override suspend fun getAll(): Either<ErrorApp, List<Rss>> = localSource.getAll()
 
-        return localSource.getAll()
-    }
 }
