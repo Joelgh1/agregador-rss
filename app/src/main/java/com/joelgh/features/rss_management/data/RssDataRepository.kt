@@ -9,10 +9,6 @@ class RssDataRepository(private val localSource: LocalDataSource) : RssRepositor
 
     override suspend fun create(rss: Rss) = localSource.create(rss)
 
-    override fun delete(rss: Rss) {
-        TODO("Not yet implemented")
-    }
-
     override suspend fun getAll(): Either<ErrorApp, List<Rss>> = localSource.getAll()
 
 }
