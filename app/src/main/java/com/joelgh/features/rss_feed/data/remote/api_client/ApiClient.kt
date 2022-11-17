@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 
 class ApiClient {
-    private val baseUrl = ""
+    private val baseUrl = "https://google.es/"
 
     private val apiEndPoints: ApiEndPoints
 
@@ -18,7 +18,5 @@ class ApiClient {
     .addConverterFactory(SimpleXmlConverterFactory.create())
     .build()
 
-    suspend fun getFeed(url: String): List<RssFeedApiModel>{
-
-    }
+    suspend fun getFeed(url: String) = apiEndPoints.getFeed(url).body()
 }
