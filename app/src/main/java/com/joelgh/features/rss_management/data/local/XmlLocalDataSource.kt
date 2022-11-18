@@ -8,10 +8,11 @@ import com.joelgh.app.commons.error_management.ErrorApp
 import com.joelgh.app.commons.error_management.left
 import com.joelgh.app.commons.error_management.right
 import com.joelgh.features.rss_management.domain.Rss
+import com.joelgh.rss_aggregator.R
 
 class XmlLocalDataSource(private val context: Context, private val serializer: KSerializer) : LocalDataSource{
 
-    private val sharedPrefs = context.getSharedPreferences("Rss", Context.MODE_PRIVATE)
+    private val sharedPrefs = context.getSharedPreferences(context.getString(R.string.management_shared_prefs), Context.MODE_PRIVATE)
 
     override suspend fun create(rss: Rss) = sharedPrefs.edit {
         putString(rss.name, serializer.toJson(rss, Rss::class.java))
