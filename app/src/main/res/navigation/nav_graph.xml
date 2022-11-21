@@ -9,7 +9,8 @@
         android:id="@+id/rssFeedFragment"
         android:name="com.joelgh.features.rss_feed.presentation.RssFeedFragment"
         android:label="fragment_rss_feed"
-        tools:layout="@layout/fragment_rss_feed" />
+        tools:layout="@layout/fragment_rss_feed" >
+    </fragment>
 
     <fragment
         android:id="@+id/rssManagementFragment"
