@@ -11,7 +11,6 @@
         android:label="fragment_rss_feed"
         tools:layout="@layout/fragment_rss_feed" >
     </fragment>
-
     <fragment
         android:id="@+id/rssManagementFragment"
         android:name="com.joelgh.features.rss_management.presentation.RssManagementFragment"
@@ -23,5 +22,17 @@
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 
+    <action
+        android:id="@+id/action_to_rss_feed"
+        app:destination="@id/rssFeedFragment" />
 
+    <action
+        android:id="@+id/action_to_rss_management"
+        app:destination="@id/rssManagementFragment"
+        />
+
+    <action
+        android:id="@+id/action_to_profile"
+        app:destination="@id/profileFragment"
+        />
 </navigation>
