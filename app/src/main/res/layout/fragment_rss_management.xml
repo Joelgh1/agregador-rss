@@ -5,12 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.joelgh.features.rss_management.presentation.RssManagementFragment">
 
-    <Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/rss_management_tool_bar"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="?actionBarSize"
+        app:titleTextColor="?colorOnPrimary"
+        app:title="@string/app_name"
+        style="@style/DefaultBackground"
+        android:theme="@style/Theme.RSSaggregator"/>
     
     <TextView
         app:layout_constraintTop_toBottomOf="@id/rss_management_tool_bar"
