@@ -6,4 +6,6 @@
     <string name="rss_management_add">Add RSS</string>
     <string name="form_cancel">Cancel</string>
     <string name="form_save">Save</string>
+    <string name="save_error">Se ha producido un error al guardar el rss</string>
+    <string name="save_success">Se ha guardado correctamente</string>
 </resources>
