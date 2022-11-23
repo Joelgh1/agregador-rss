@@ -15,12 +15,22 @@
         android:id="@+id/rssManagementFragment"
         android:name="com.joelgh.features.rss_management.presentation.RssManagementFragment"
         android:label="fragment_rss_management"
-        tools:layout="@layout/fragment_rss_management" />
+        tools:layout="@layout/fragment_rss_management">
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.joelgh.features.rss_profile.presentation.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.joelgh.features.rss_management.presentation.AddRssFormBottomSheet"
+        android:label="BottomSheetFragment" />
+
+    <action
+        android:id="@+id/action_form_data"
+        app:destination="@id/bottomSheetFragment"/>
 
     <action
         android:id="@+id/action_to_rss_feed"
@@ -35,4 +45,5 @@
         android:id="@+id/action_to_profile"
         app:destination="@id/profileFragment"
         />
+
 </navigation>
