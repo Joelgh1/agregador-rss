@@ -13,7 +13,9 @@ import kotlinx.coroutines.withContext
 
 class AddRssFormViewModel(private val saveRssUseCase: SaveRssUseCase) : ViewModel() {
 
-    var publisher: MutableLiveData<UiModel> = MutableLiveData()
+    val publisher: MutableLiveData<UiModel> by lazy{
+        MutableLiveData<UiModel>()
+    }
 
     fun saveRss(name: String, url: String){
         viewModelScope.launch(Dispatchers.IO){
@@ -29,7 +31,7 @@ class AddRssFormViewModel(private val saveRssUseCase: SaveRssUseCase) : ViewMode
     }
 
     data class UiModel(
-        var status: Boolean
+        var isSuccess: Boolean
     )
 
 }
