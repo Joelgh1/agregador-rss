@@ -20,9 +20,7 @@ import com.joelgh.rss_aggregator.databinding.FragmentRssManagementBinding
 
 class RssManagementFragment : Fragment() {
     private var binding: FragmentRssManagementBinding? = null
-
-    private var name: String? = null
-    private var url: String? = null
+    private var viewModel: RssManagementViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +33,7 @@ class RssManagementFragment : Fragment() {
     ): View? {
         binding = FragmentRssManagementBinding.inflate(inflater, container, false)
         setUpToolBar()
+        viewModel = ManagementFactory.getRssManagementViewModel(requireContext())
         return binding?.root
     }
 
@@ -52,6 +51,23 @@ class RssManagementFragment : Fragment() {
 
     private fun showForm(){
         findNavController().navigate(NavGraphDirections.actionFormData())
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpObserver()
+    }
+
+    private fun setUpObserver(){
+        val suscriber = Observer<RssManagementViewModel.UiState>{
+            if(it.isLoading){
+                //Codigo de pantalla de carga
+            }else{
+                //Gestion del either
+            }
+        }
+
+        viewModel?.rssPublisher?.observe(viewLifecycleOwner, suscriber)
     }
 
 }
