@@ -11,9 +11,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.snackbar.Snackbar
 import com.joelgh.app.commons.GsonSerializer
+import com.joelgh.app.commons.error_management.Either
 import com.joelgh.features.rss_management.data.RssDataRepository
 import com.joelgh.features.rss_management.data.local.XmlLocalDataSource
 import com.joelgh.features.rss_management.domain.SaveRssUseCase
+import com.joelgh.features.rss_management.presentation.adapter.RssManagementAdapter
 import com.joelgh.rss_aggregator.NavGraphDirections
 import com.joelgh.rss_aggregator.R
 import com.joelgh.rss_aggregator.databinding.FragmentRssManagementBinding
@@ -21,6 +23,7 @@ import com.joelgh.rss_aggregator.databinding.FragmentRssManagementBinding
 class RssManagementFragment : Fragment() {
     private var binding: FragmentRssManagementBinding? = null
     private var viewModel: RssManagementViewModel? = null
+    private val adapater = RssManagementAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,7 +66,7 @@ class RssManagementFragment : Fragment() {
             if(it.isLoading){
                 //Codigo de pantalla de carga
             }else{
-                //Gestion del either
+                adapater.setDataItems(it.rssList)
             }
         }
 

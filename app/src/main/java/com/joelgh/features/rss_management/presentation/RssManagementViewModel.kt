@@ -21,12 +21,20 @@ class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
         rssPublisher.value = UiState(true)
         viewModelScope.launch(Dispatchers.IO) {
             val rss = getRss.execute()
-            rssPublisher.postValue(UiState(false, rss))
+            when(rss){
+                is Either.Left -> rssPublisher.postValue(
+                    UiState(false, rss.value)
+                )
+                is Either.Right -> rssPublisher.postValue(
+                    UiState(false, rssList = rss.value)
+                )
+            }
         }
     }
 
     data class UiState(
         val isLoading: Boolean,
-        val rssList: Either<ErrorApp, List<Rss>> = ErrorApp.DataError().left()
+        val error: ErrorApp? = null,
+        val rssList: List<Rss> = emptyList()
     )
 }
