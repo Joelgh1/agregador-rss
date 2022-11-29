@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.joelgh.app.commons.GsonSerializer
 import com.joelgh.app.commons.error_management.Either
@@ -23,7 +25,7 @@ import com.joelgh.rss_aggregator.databinding.FragmentRssManagementBinding
 class RssManagementFragment : Fragment() {
     private var binding: FragmentRssManagementBinding? = null
     private var viewModel: RssManagementViewModel? = null
-    private val adapater = RssManagementAdapter()
+    private val rssAdapter = RssManagementAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,13 +37,21 @@ class RssManagementFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentRssManagementBinding.inflate(inflater, container, false)
-        setUpToolBar()
+        setUpView()
         viewModel = ManagementFactory.getRssManagementViewModel(requireContext())
         return binding?.root
     }
 
-    private fun setUpToolBar(){
+    private fun setUpView(){
         binding?.apply {
+            rssManagementRecycler.apply {
+                adapter = rssAdapter
+                layoutManager = LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+            }
             rssManagementToolBar.inflateMenu(R.menu.management_tool_bar_menu)
             rssManagementToolBar.setOnMenuItemClickListener{
                 when(it.itemId){
@@ -59,6 +69,7 @@ class RssManagementFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpObserver()
+        viewModel?.getRss()
     }
 
     private fun setUpObserver(){
@@ -66,7 +77,7 @@ class RssManagementFragment : Fragment() {
             if(it.isLoading){
                 //Codigo de pantalla de carga
             }else{
-                adapater.setDataItems(it.rssList)
+                rssAdapter.setDataItems(it.rssList)
             }
         }
 

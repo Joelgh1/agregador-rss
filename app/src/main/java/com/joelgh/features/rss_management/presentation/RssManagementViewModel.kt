@@ -26,7 +26,7 @@ class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
                     UiState(false, rss.value)
                 )
                 is Either.Right -> rssPublisher.postValue(
-                    UiState(false, rssList = rss.value)
+                    UiState(false, null, rss.value)
                 )
             }
         }

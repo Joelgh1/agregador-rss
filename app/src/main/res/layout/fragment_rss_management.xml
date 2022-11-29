@@ -16,4 +16,11 @@
         style="@style/DefaultBackground"
         android:theme="@style/Theme.RSSaggregator"/>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rss_management_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/rss_management_tool_bar"
+        app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
