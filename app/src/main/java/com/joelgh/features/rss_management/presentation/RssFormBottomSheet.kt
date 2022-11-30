@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
+import com.joelgh.app.commons.showSnackBar
 import com.joelgh.rss_aggregator.R
 import com.joelgh.rss_aggregator.databinding.RssFormBottomSheetBinding
 
@@ -37,7 +38,6 @@ class RssFormBottomSheet : BottomSheetDialogFragment() {
             saveRssButton.setOnClickListener{
                 viewModel?.saveRss(rssInputName.text.toString(), rssInputUrl.text.toString())
                 findNavController().navigateUp()
-                showSnackBar(true)
             }
             cancelRssButton.setOnClickListener{
                 findNavController().navigateUp()
@@ -48,30 +48,15 @@ class RssFormBottomSheet : BottomSheetDialogFragment() {
 
     private fun setUpObserver(){
         val suscriber = Observer<AddRssFormViewModel.UiModel>{
-            if(it.isSuccess){
-                showSnackBar(true)
-            }else{
-                showSnackBar(false)
+            if (it.isSuccess)
+                requireActivity().findViewById<View>(R.id.nav_host_fragment).showSnackBar(getString(R.string.save_success))
+            else {
+                requireActivity().findViewById<View>(R.id.nav_host_fragment).showSnackBar(getString(R.string.save_error))
             }
         }
 
         viewModel?.publisher?.observe(viewLifecycleOwner, suscriber)
     }
 
-    private fun showSnackBar(isSuccess: Boolean){
-        if(isSuccess){
-            Snackbar.make(
-                requireActivity().findViewById(R.id.nav_host_fragment),
-                R.string.save_success,
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }else{
-            Snackbar.make(
-                requireActivity().findViewById(R.id.nav_host_fragment),
-                R.string.save_error,
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-    }
 
 }
