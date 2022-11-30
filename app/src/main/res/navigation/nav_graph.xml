@@ -25,7 +25,7 @@
 
     <dialog
         android:id="@+id/bottomSheetFragment"
-        android:name="com.joelgh.features.rss_management.presentation.AddRssFormBottomSheet"
+        android:name="com.joelgh.features.rss_management.presentation.RssFormBottomSheet"
         android:label="BottomSheetFragment" />
 
     <action

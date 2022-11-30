@@ -14,19 +14,15 @@ class XmlLocalDataSource(private val context: Context, private val serializer: K
     private val sharedPrefs = context.getSharedPreferences("Rss", Context.MODE_PRIVATE)
 
     override suspend fun create(rss: Rss): Either<ErrorApp, Boolean> {
-        return if(sharedPrefs.contains(rss.name) ||
-                rss.name == "" || rss.url == ""){
-            ErrorApp.DataError().left()
-        }else{
+        try {
             sharedPrefs.edit {
                 putString(rss.name, serializer.toJson(rss, Rss::class.java))
             }
-            return if(sharedPrefs.contains(rss.name)){
-                true.right()
-            }else{
-                ErrorApp.DataError().left()
-            }
+            return true.right()
+        }catch (e: java.lang.Exception){
+            return ErrorApp.DataError().left()
         }
+
     }
 
     override suspend fun getAll(): Either<ErrorApp, List<Rss>> {

@@ -8,4 +8,6 @@
     <string name="form_save">Save</string>
     <string name="save_error">Se ha producido un error al guardar el rss</string>
     <string name="save_success">Se ha guardado correctamente</string>
+    <string name="name_hint"></string>
+    <string name="url_hint"></string>
 </resources>

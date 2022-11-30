@@ -9,11 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.joelgh.rss_aggregator.R
-import com.joelgh.rss_aggregator.databinding.BottomSheetBinding
+import com.joelgh.rss_aggregator.databinding.RssFormBottomSheetBinding
 
-class AddRssFormBottomSheet : BottomSheetDialogFragment() {
+class RssFormBottomSheet : BottomSheetDialogFragment() {
 
-    private var binding: BottomSheetBinding? = null
+    private var binding: RssFormBottomSheetBinding? = null
     private var viewModel: AddRssFormViewModel? = null
 
     override fun onCreateView(
@@ -21,7 +21,7 @@ class AddRssFormBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = BottomSheetBinding.inflate(inflater)
+        binding = RssFormBottomSheetBinding.inflate(inflater)
         viewModel = ManagementFactory.getAddRssViewModel(requireContext())
         setUpView()
         return binding?.root
