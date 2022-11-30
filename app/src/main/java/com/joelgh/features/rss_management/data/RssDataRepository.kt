@@ -7,7 +7,7 @@ import com.joelgh.features.rss_management.domain.RssRepository
 
 class RssDataRepository(private val localSource: LocalDataSource) : RssRepository {
 
-    override suspend fun create(rss: Rss) = localSource.create(rss)
+    override suspend fun create(name: String, url: String) = localSource.create(name, url)
 
     override suspend fun getAll(): Either<ErrorApp, List<Rss>> = localSource.getAll()
 
