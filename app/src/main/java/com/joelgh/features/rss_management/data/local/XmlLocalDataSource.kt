@@ -48,7 +48,7 @@ class XmlLocalDataSource(private val context: Context, private val serializer: K
         }else{
             sharedPrefs.edit().apply{
                 remove(name)
-            }
+            }.apply()
             if(sharedPrefs.contains(name)){
                 ErrorApp.DataError().left()
             }else{
