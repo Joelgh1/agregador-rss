@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.joelgh.app.commons.GsonSerializer
 import com.joelgh.app.commons.error_management.Either
+import com.joelgh.app.commons.showErrorSnackBar
 import com.joelgh.features.rss_management.data.RssDataRepository
 import com.joelgh.features.rss_management.data.local.XmlLocalDataSource
 import com.joelgh.features.rss_management.domain.SaveRssUseCase
@@ -77,7 +78,12 @@ class RssManagementFragment : Fragment() {
             if(it.isLoading){
                 //Codigo de pantalla de carga
             }else{
-                rssAdapter.setDataItems(it.rssList)
+                if(it.error == null){
+                    rssAdapter.setDataItems(it.rssList)
+                }else{
+                    rssAdapter.setDataItems(it.rssList)
+                    showErrorSnackBar()
+                }
             }
         }
 
