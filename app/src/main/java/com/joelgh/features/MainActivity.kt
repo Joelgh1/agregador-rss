@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.joelgh.rss_aggregator.NavGraphDirections
 import com.joelgh.rss_aggregator.R
 import com.joelgh.rss_aggregator.databinding.ActivityMainBinding
