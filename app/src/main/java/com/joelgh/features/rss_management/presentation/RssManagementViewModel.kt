@@ -19,6 +19,8 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
         MutableLiveData<UiState>()
     }
 
+    private var rssList: List<Rss>? = null
+
     fun getRss() {
         rssPublisher.value = UiState(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -27,9 +29,13 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
                 is Either.Left -> rssPublisher.postValue(
                     UiState(false, rss.value)
                 )
-                is Either.Right -> rssPublisher.postValue(
-                    UiState(false, null, rss.value)
-                )
+                is Either.Right -> {
+                    rssList = rss.value
+                    rssPublisher.postValue(
+                        UiState(false, null, rss.value)
+                    )
+                }
+
             }
         }
     }
@@ -37,18 +43,23 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
     fun deleteRss(name: String){
         viewModelScope.launch(Dispatchers.IO){
             val result = deleteRss.execute(name)
-            /*when(result){
+            when(result){
                 is Either.Left -> rssPublisher.postValue(
                     UiState(false, result.value)
                 )
-                is Either.Right -> getRss()
-            }*/
+                is Either.Right -> {
+                    rssPublisher.postValue(
+                        UiState(false, null, rssList, true)
+                    )
+                }
+            }
         }
     }
 
     data class UiState(
         val isLoading: Boolean,
         val error: ErrorApp? = null,
-        val rssList: List<Rss> = emptyList()
+        val rssList: List<Rss>? = emptyList(),
+        val deleteSuccess: Boolean = false
     )
 }

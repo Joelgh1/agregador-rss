@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.joelgh.app.commons.error_management.ErrorApp
 import com.joelgh.app.commons.showSnackBar
 import com.joelgh.features.rss_management.presentation.adapter.RssManagementAdapter
 import com.joelgh.rss_aggregator.NavGraphDirections
@@ -70,16 +71,20 @@ class RssManagementFragment : Fragment() {
                 //Codigo de pantalla de carga
             }else{
                 if(it.error == null){
-                    rssAdapter.setDataItems(it.rssList)
+                    rssAdapter.setDataItems(it.rssList!!)
                     rssAdapter.setOnClickItem {
                         viewModel?.deleteRss(it)
                     }
+                    if(it.deleteSuccess)showSnackBar(getString(R.string.delete_success))
                 }else{
-                    rssAdapter.setDataItems(it.rssList)
+                    rssAdapter.setDataItems(it.rssList!!)
                     rssAdapter.setOnClickItem {
                         viewModel?.deleteRss(it)
                     }
-                    showSnackBar(getString(R.string.generic_error))
+                    when(it.error){
+                        is ErrorApp.DataError -> showSnackBar(getString(R.string.no_rss_found))
+                        is ErrorApp.DeleteError -> showSnackBar(getString(R.string.delete_error))
+                    }
                 }
             }
         }

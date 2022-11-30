@@ -9,4 +9,7 @@
     <string name="save_error">Se ha producido un error al guardar el rss</string>
     <string name="save_success">Se ha guardado correctamente</string>
     <string name="generic_error">Se ha producido un error</string>
+    <string name="delete_error">Se ha producido un error al eliminar el rss</string>
+    <string name="delete_success">Se ha eliminado correctamente</string>
+    <string name="no_rss_found">No se ha encontrado ningun rss</string>
 </resources>

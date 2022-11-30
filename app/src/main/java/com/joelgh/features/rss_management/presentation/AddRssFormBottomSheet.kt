@@ -37,7 +37,6 @@ class AddRssFormBottomSheet : BottomSheetDialogFragment() {
             saveRssButton.setOnClickListener{
                 viewModel?.saveRss(rssInputName.text.toString(), rssInputUrl.text.toString())
                 findNavController().navigateUp()
-                showSnackBar(true)
             }
             cancelRssButton.setOnClickListener{
                 findNavController().navigateUp()
