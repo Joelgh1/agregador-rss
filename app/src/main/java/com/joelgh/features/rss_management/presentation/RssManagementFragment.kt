@@ -80,9 +80,15 @@ class RssManagementFragment : Fragment() {
             }else{
                 if(it.error == null){
                     rssAdapter.setDataItems(it.rssList)
+                    rssAdapter.setOnClickItem {
+                        viewModel?.deleteRss(it)
+                    }
                 }else{
                     rssAdapter.setDataItems(it.rssList)
-                    showErrorSnackBar()
+                    rssAdapter.setOnClickItem {
+                        viewModel?.deleteRss(it)
+                    }
+                    showErrorSnackBar(getString(R.string.generic_error))
                 }
             }
         }

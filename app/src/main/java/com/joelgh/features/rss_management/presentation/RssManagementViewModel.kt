@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.joelgh.app.commons.error_management.Either
 import com.joelgh.app.commons.error_management.ErrorApp
 import com.joelgh.app.commons.error_management.left
+import com.joelgh.features.rss_management.domain.DeleteRssUseCase
 import com.joelgh.features.rss_management.domain.GetRssUseCase
 import com.joelgh.features.rss_management.domain.Rss
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
+class RssManagementViewModel(private val getRss: GetRssUseCase,
+                             private val deleteRss: DeleteRssUseCase) : ViewModel(){
 
     val rssPublisher: MutableLiveData<UiState> by lazy {
         MutableLiveData<UiState>()
@@ -29,6 +31,18 @@ class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
                     UiState(false, null, rss.value)
                 )
             }
+        }
+    }
+
+    fun deleteRss(name: String){
+        viewModelScope.launch(Dispatchers.IO){
+            val result = deleteRss.execute(name)
+            /*when(result){
+                is Either.Left -> rssPublisher.postValue(
+                    UiState(false, result.value)
+                )
+                is Either.Right -> getRss()
+            }*/
         }
     }
 
