@@ -3,7 +3,7 @@ package com.joelgh.app.commons
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
-fun Fragment.showErrorSnackBar(text: String){
+fun Fragment.showSnackBar(text: String){
     Snackbar.make(
         requireView(),
         text,
