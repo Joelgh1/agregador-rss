@@ -78,11 +78,10 @@ class RssManagementFragment : Fragment() {
             if(it.isLoading){
                 //Codigo de pantalla de carga
             }else{
-                if(it.error == null){
-                    rssAdapter.setDataItems(it.rssList)
+                if(it.error != null){
+                    showErrorSnackBar()
                 }else{
                     rssAdapter.setDataItems(it.rssList)
-                    showErrorSnackBar()
                 }
             }
         }
