@@ -42,5 +42,16 @@ class XmlLocalDataSource(private val context: Context, private val serializer: K
         }
     }
 
+    override suspend fun delete(name: String): Either<ErrorApp, Boolean> {
+        return if (!sharedPrefs.contains(name)){
+            ErrorApp.DataError().left()
+        }else{
+            sharedPrefs.edit().apply{
+                remove(name)
+            }.apply()
+            true.right()
+        }
+    }
+
 
 }
