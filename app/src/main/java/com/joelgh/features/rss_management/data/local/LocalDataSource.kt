@@ -7,5 +7,5 @@ import com.joelgh.features.rss_management.domain.Rss
 interface LocalDataSource {
     suspend fun create(rss: Rss): Either<ErrorApp, Boolean>
     suspend fun getAll(): Either<ErrorApp, List<Rss>>
-    suspend fun delete(name: String): Either<ErrorApp, Boolean>
+    suspend fun delete(url: String): Either<ErrorApp, Boolean>
 }

@@ -9,9 +9,7 @@ class RssDataRepository(private val localSource: LocalDataSource) : RssRepositor
 
     override suspend fun create(rss: Rss) = localSource.create(rss)
 
-    override suspend fun delete(name: String): Either<ErrorApp, Boolean> {
-        return localSource.delete(name)
-    }
+    override suspend fun delete(url: String): Either<ErrorApp, Boolean> = localSource.delete(url)
 
     override suspend fun getAll(): Either<ErrorApp, List<Rss>> = localSource.getAll()
 
