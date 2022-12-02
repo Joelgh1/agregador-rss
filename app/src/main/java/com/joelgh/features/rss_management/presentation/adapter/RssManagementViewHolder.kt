@@ -13,7 +13,7 @@ class RssManagementViewHolder(private val view: View) : RecyclerView.ViewHolder(
             rssName.text = rss.name
             rssUrl.text = rss.url
             rssDeleteIc.setOnClickListener {
-                itemClick?.invoke(rss.name)
+                itemClick?.invoke(rss.url)
             }
         }
     }
