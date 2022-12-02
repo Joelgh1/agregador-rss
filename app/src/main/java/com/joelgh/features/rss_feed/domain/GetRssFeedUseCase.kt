@@ -2,7 +2,8 @@ package com.joelgh.features.rss_feed.domain
 
 import com.joelgh.features.rss_management.domain.RssRepository
 
-class GetRssFeedUseCase(private val rssRepository: RssRepository) {
+class GetRssFeedUseCase(private val rssRepository: RssRepository,
+                        private val rssNewsRepository: NewsRepository) {
 
     fun execute(url: String){
 
