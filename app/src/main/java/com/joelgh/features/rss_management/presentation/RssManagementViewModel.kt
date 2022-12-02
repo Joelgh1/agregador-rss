@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.joelgh.app.commons.error_management.Either
 import com.joelgh.app.commons.error_management.ErrorApp
 import com.joelgh.app.commons.error_management.left
+import com.joelgh.features.rss_management.domain.DeleteRssUseCase
 import com.joelgh.features.rss_management.domain.GetRssUseCase
 import com.joelgh.features.rss_management.domain.Rss
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
+class RssManagementViewModel(private val getRss: GetRssUseCase,
+                             private val deleteRss: DeleteRssUseCase) : ViewModel(){
 
     val rssPublisher: MutableLiveData<UiState> by lazy {
         MutableLiveData<UiState>()
@@ -25,9 +27,28 @@ class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
                 is Either.Left -> rssPublisher.postValue(
                     UiState(false, rss.value)
                 )
-                is Either.Right -> rssPublisher.postValue(
-                    UiState(false, null, rss.value)
+                is Either.Right -> {
+                    rssPublisher.postValue(
+                        UiState(false, null, rss.value)
+                    )
+                }
+
+            }
+        }
+    }
+
+    fun deleteRss(name: String){
+        viewModelScope.launch(Dispatchers.IO){
+            val result = deleteRss.execute(name)
+            when(result){
+                is Either.Left -> rssPublisher.postValue(
+                    UiState(false, result.value)
                 )
+                is Either.Right -> {
+                    rssPublisher.postValue(
+                        UiState(false, null, deleteSuccess = true)
+                    )
+                }
             }
         }
     }
@@ -35,6 +56,7 @@ class RssManagementViewModel(private val getRss: GetRssUseCase) : ViewModel(){
     data class UiState(
         val isLoading: Boolean,
         val error: ErrorApp? = null,
-        val rssList: List<Rss> = emptyList()
+        val rssList: List<Rss>? = emptyList(),
+        val deleteSuccess: Boolean = false
     )
 }
