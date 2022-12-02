@@ -77,13 +77,8 @@ class RssManagementFragment : Fragment() {
                     }
                     if(it.deleteSuccess)showSnackBar(getString(R.string.delete_success))
                 }else{
-                    rssAdapter.setDataItems(it.rssList!!)
-                    rssAdapter.setOnClickItem {
-                        viewModel?.deleteRss(it)
-                    }
                     when(it.error){
-                        is ErrorApp.DataError -> showSnackBar(getString(R.string.no_rss_found))
-                        is ErrorApp.DeleteError -> showSnackBar(getString(R.string.delete_error))
+                        is ErrorApp.DataError -> showSnackBar(getString(R.string.generic_error))
                     }
                 }
             }

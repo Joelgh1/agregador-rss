@@ -19,8 +19,6 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
         MutableLiveData<UiState>()
     }
 
-    private var rssList: List<Rss>? = null
-
     fun getRss() {
         rssPublisher.value = UiState(true)
         viewModelScope.launch(Dispatchers.IO) {
@@ -30,7 +28,6 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
                     UiState(false, rss.value)
                 )
                 is Either.Right -> {
-                    rssList = rss.value
                     rssPublisher.postValue(
                         UiState(false, null, rss.value)
                     )
@@ -49,7 +46,7 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
                 )
                 is Either.Right -> {
                     rssPublisher.postValue(
-                        UiState(false, null, rssList, true)
+                        UiState(false, null, deleteSuccess = true)
                     )
                 }
             }
