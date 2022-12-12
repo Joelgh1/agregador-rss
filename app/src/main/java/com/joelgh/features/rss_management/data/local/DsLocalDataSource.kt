@@ -14,11 +14,13 @@ import com.joelgh.rss_aggregator.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+private val Context.dataStore by preferencesDataStore(
+    name = "Rss_datastore"//context.getString(R.string.datastore_file)
+)
+
 class DsLocalDataSource(private val context: Context, private val serializer: KSerializer) : LocalDataSource{
 
-    private val Context.dataStore by preferencesDataStore(
-        name = context.getString(R.string.datastore_file)
-    )
+
 
     override suspend fun create(rss: Rss): Either<ErrorApp, Boolean> {
         return try {
@@ -41,8 +43,10 @@ class DsLocalDataSource(private val context: Context, private val serializer: KS
 
     override suspend fun delete(url: String): Either<ErrorApp, Boolean> {
         return try {
-            context.dataStore.edit {
-                it.remove(stringPreferencesKey(url))
+            context.dataStore.apply {
+                this.edit {
+                    it.remove(stringPreferencesKey(url))
+                }
             }
             true.right()
         }catch (e: Exception){

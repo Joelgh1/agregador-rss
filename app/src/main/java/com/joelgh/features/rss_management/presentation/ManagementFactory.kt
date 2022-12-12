@@ -28,5 +28,6 @@ class ManagementFactory {
         private fun getLocalSource(context: Context): LocalDataSource{
             return DsLocalDataSource(context, GsonSerializer())
         }
+
     }
 }

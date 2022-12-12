@@ -10,6 +10,7 @@ import com.joelgh.features.rss_management.domain.DeleteRssUseCase
 import com.joelgh.features.rss_management.domain.GetRssUseCase
 import com.joelgh.features.rss_management.domain.Rss
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class RssManagementViewModel(private val getRss: GetRssUseCase,
@@ -22,24 +23,30 @@ class RssManagementViewModel(private val getRss: GetRssUseCase,
     fun getRss() {
         rssPublisher.value = UiState(true)
         viewModelScope.launch(Dispatchers.IO) {
-            val rss = getRss.execute()
-            when(rss){
-                is Either.Left -> rssPublisher.postValue(
-                    UiState(false, rss.value)
-                )
-                is Either.Right -> {
+            getRss.execute().collect{
+                it.fold({ errorApp ->
                     rssPublisher.postValue(
-                        UiState(false, null, rss.value)
+                        UiState(
+                            false,
+                            errorApp
+                        )
                     )
-                }
-
+                },{ rssList ->
+                    rssPublisher.postValue(
+                        UiState(
+                            false,
+                            null,
+                            rssList
+                        )
+                    )
+                })
             }
         }
     }
 
-    fun deleteRss(name: String){
+    fun deleteRss(url: String){
         viewModelScope.launch(Dispatchers.IO){
-            val result = deleteRss.execute(name)
+            val result = deleteRss.execute(url)
             when(result){
                 is Either.Left -> rssPublisher.postValue(
                     UiState(false, result.value)
