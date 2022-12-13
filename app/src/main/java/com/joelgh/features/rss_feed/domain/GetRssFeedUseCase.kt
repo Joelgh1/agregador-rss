@@ -18,4 +18,8 @@ class GetRssFeedUseCase(private val rssRepository: RssRepository, private val ne
             news.right()
         }
     }
+
+    data class NewRss(
+        val title: String
+    )
 }
