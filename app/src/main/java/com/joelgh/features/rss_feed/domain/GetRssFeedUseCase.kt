@@ -19,9 +19,9 @@ class GetRssFeedUseCase(private val rssRepository: RssRepository, private val ne
     }
 
     data class NewRss(
-        val title: String,
-        val image: String,
-        val source: String,
-        val description: String
+        val title: String?,
+        val image: String?,
+        val source: String?,
+        val description: String?
     )
 }
