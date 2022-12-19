@@ -26,7 +26,7 @@ class XmlLocalDataSource(private val context: Context,
     override fun get(url: String): Either<ErrorApp, NewsRssModel> {
 
         return if(sharedPrefs.contains(url)){
-            val time = sharedPrefs.getLong(url + "t", 0)
+            val time = sharedPrefs.getLong(url + "t", System.currentTimeMillis())
             if(time + 1800000 >= System.currentTimeMillis()){
                 ErrorApp.DataError().left()
             }else{
