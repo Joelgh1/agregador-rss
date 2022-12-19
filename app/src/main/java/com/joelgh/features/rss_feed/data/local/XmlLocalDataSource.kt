@@ -19,20 +19,22 @@ class XmlLocalDataSource(private val context: Context,
         val time = System.currentTimeMillis()
         sharedPrefs.edit().apply{
             putString(url, serializer.toJson(feedModel, NewsRssModel::class.java))
-            putString(url + "t", serializer.toJson(time, Long::class.java))
+            putLong(url + "t", time)
         }
     }
 
     override fun get(url: String): Either<ErrorApp, NewsRssModel> {
-        val time = serializer.fromJson(sharedPrefs.getString(url + "t", null),
-            Long::class.java)
 
-        return if(time + 1800000 >= System.currentTimeMillis()){
-            ErrorApp.DataError().left()
+        return if(sharedPrefs.contains(url)){
+            val time = sharedPrefs.getLong(url + "t", 0)
+            if(time + 1800000 >= System.currentTimeMillis()){
+                ErrorApp.DataError().left()
+            }else{
+                serializer.fromJson(sharedPrefs.getString(url, null),
+                    NewsRssModel::class.java).right()
+            }
         }else{
-            serializer.fromJson(sharedPrefs.getString(url, null),
-                NewsRssModel::class.java).right()
+            ErrorApp.DataError().left()
         }
-
     }
 }
