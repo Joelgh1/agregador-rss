@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/news_image"
+        tools:src="@tools:sample/avatars"
+        android:layout_margin="@dimen/default_spacing"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/news_source"/>
+
+    <TextView
+        android:id="@+id/news_title"
+        android:layout_margin="@dimen/default_spacing"
+        tools:text="Titulo de la noticia"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/news_image"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/news_description"
+        tools:text="@tools:sample/lorem/random"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_spacing"
+        android:paddingEnd="@dimen/default_spacing"
+        android:maxLines="3"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="@id/news_title"
+        app:layout_constraintTop_toBottomOf="@id/news_title"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/news_source"
+        tools:text="Fuente: fuente de la noticia"
+        android:textSize="@dimen/default_text_size"
+        android:layout_marginVertical="@dimen/default_spacing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/news_description"
+        app:layout_constraintTop_toBottomOf="@id/news_description"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
