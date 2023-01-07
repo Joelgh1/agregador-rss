@@ -1,10 +1,10 @@
 package com.joelgh.features.rss_management.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +35,7 @@ class RssManagementFragment : Fragment() {
         return binding?.root
     }
 
-    private fun setUpView(){
+    private fun setUpView() {
         binding?.apply {
             rssManagementRecycler.apply {
                 adapter = rssAdapter
@@ -46,8 +46,8 @@ class RssManagementFragment : Fragment() {
                 )
             }
             rssManagementToolBar.inflateMenu(R.menu.management_tool_bar_menu)
-            rssManagementToolBar.setOnMenuItemClickListener{
-                when(it.itemId){
+            rssManagementToolBar.setOnMenuItemClickListener {
+                when (it.itemId) {
                     R.id.action_add -> showForm()
                 }
                 true
@@ -55,7 +55,7 @@ class RssManagementFragment : Fragment() {
         }
     }
 
-    private fun showForm(){
+    private fun showForm() {
         findNavController().navigate(NavGraphDirections.actionFormData())
     }
 
@@ -65,20 +65,21 @@ class RssManagementFragment : Fragment() {
         viewModel?.getRss()
     }
 
-    private fun setUpObserver(){
-        val suscriber = Observer<RssManagementViewModel.UiState>{
-            if(it.isLoading){
+    private fun setUpObserver() {
+        val suscriber = Observer<RssManagementViewModel.UiState> {
+            if (it.isLoading) {
                 //Codigo de pantalla de carga
-            }else{
-                if(it.error == null){
+            } else {
+                if (it.error == null) {
                     rssAdapter.setDataItems(it.rssList!!)
                     rssAdapter.setOnClickItem {
                         viewModel?.deleteRss(it)
                     }
-                    if(it.deleteSuccess)showSnackBar(getString(R.string.delete_success))
-                }else{
-                    when(it.error){
+                    if (it.deleteSuccess) showSnackBar(getString(R.string.delete_success))
+                } else {
+                    when (it.error) {
                         is ErrorApp.DataError -> showSnackBar(getString(R.string.generic_error))
+                        is ErrorApp.UnknowError -> showSnackBar(getString(R.string.generic_error))
                     }
                 }
             }
