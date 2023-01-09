@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RSS-aggregator</string>
+    <string name="management_shared_prefs">Rss</string>
 </resources>
