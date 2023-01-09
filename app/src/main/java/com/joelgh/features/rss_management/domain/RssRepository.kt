@@ -4,7 +4,6 @@ import com.joelgh.app.commons.error_management.Either
 import com.joelgh.app.commons.error_management.ErrorApp
 
 interface RssRepository {
-    suspend fun create(rss: Rss)
-    fun delete(rss: Rss)
+    suspend fun create(name: String, url: String)
     suspend fun getAll(): Either<ErrorApp, List<Rss>>
 }

@@ -3,4 +3,5 @@
     <string name="profile_fragment">Profile fragment</string>
     <string name="rss_feed_fragment">Feed fragment</string>
     <string name="rss_management_fragment">Management fragment</string>
+    <string name="management_shared_prefs">Rss</string>
 </resources>
