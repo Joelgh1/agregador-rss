@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
     private fun setUpNavigation(){
         binding?.bottomNavigation?.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.page_1 -> navigateToManagement()
-                R.id.page_2 -> navigateToFeed()
-                R.id.page_3 -> navigateToProfile()
+                R.id.rss_management -> navigateToManagement()
+                R.id.rss_feed -> navigateToFeed()
+                R.id.profile -> navigateToProfile()
             }
             true
         }
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.page_2
+        findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.rss_feed
     }
 
     private fun navigateToFeed(){

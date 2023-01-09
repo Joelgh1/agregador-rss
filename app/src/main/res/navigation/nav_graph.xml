@@ -5,6 +5,20 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/rssFeedFragment">
 
+    <action
+        android:id="@+id/action_to_rss_feed"
+        app:destination="@id/rssFeedFragment" />
+
+    <action
+        android:id="@+id/action_to_rss_management"
+        app:destination="@id/rssManagementFragment"
+        />
+
+    <action
+        android:id="@+id/action_to_profile"
+        app:destination="@id/profileFragment"
+        />
+
     <fragment
         android:id="@+id/rssFeedFragment"
         android:name="com.joelgh.features.rss_feed.presentation.RssFeedFragment"
