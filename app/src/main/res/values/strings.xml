@@ -3,5 +3,12 @@
     <string name="profile_fragment">Profile fragment</string>
     <string name="rss_feed_fragment">Feed fragment</string>
     <string name="rss_management_fragment">Management fragment</string>
+    <string name="rss_management_add">Add RSS</string>
+    <string name="form_cancel">Cancel</string>
+    <string name="form_save">Save</string>
+    <string name="save_error">Se ha producido un error al guardar el rss</string>
+    <string name="save_success">Se ha guardado correctamente</string>
+    <string name="name_hint"></string>
+    <string name="url_hint"></string>
     <string name="management_shared_prefs">Rss</string>
 </resources>
