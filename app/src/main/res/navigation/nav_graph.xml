@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/rssFeedFragment">
+
+    <action
+        android:id="@+id/action_to_rss_feed"
+        app:destination="@id/rssFeedFragment" />
+
+    <action
+        android:id="@+id/action_to_rss_management"
+        app:destination="@id/rssManagementFragment"
+        />
+
+    <action
+        android:id="@+id/action_to_profile"
+        app:destination="@id/profileFragment"
+        />
+
+    <fragment
+        android:id="@+id/rssFeedFragment"
+        android:name="com.joelgh.features.rss_feed.presentation.RssFeedFragment"
+        android:label="fragment_rss_feed"
+        tools:layout="@layout/fragment_rss_feed" >
+    </fragment>
+    <fragment
+        android:id="@+id/rssManagementFragment"
+        android:name="com.joelgh.features.rss_management.presentation.RssManagementFragment"
+        android:label="fragment_rss_management"
+        tools:layout="@layout/fragment_rss_management" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.joelgh.features.rss_profile.presentation.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>
